@@ -1,11 +1,665 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Data Display Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    </head>
+    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="../../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- Map Libraries -->
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/sonification.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
+
+    <style>
+        .green-checkmark::before {
+            content: "\2714";
+            color: green !important;
+        }
+
+        /* Add this code to set the default color of the checkmark */
+        .filter-option-selection .filter-option-checkmark::before {
+            color: green !important;
+        }
+
+        .highcharts-figure {
+            min-width: 320px;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        
+        #map {
+            height: 500px;
+        }
+        
+        .loading {
+            margin-top: 10em;
+            text-align: center;
+            color: gray;
+        }
+        .bar {
+            border-right: 3px solid gray;
+            opacity: 0.7;
+            height: 16px;
+            margin-top: 5px;
+            margin-bottom: 1px;
+        }
+
+        /* Add this code to hide the data display section by default */
+    </style>
 </head>
+
 <body>
-    
+    <div class="container-fluid">
+        <h2>Ethiopia Development Indicator</h2>
+        <hr class="divider">
+        <div class="row">
+            <div class="col-md-4">
+            <h4>Indicator Varibles</h4>
+            <hr class="dropdown-divider">
+            <ul id="filters">
+                <li class="filter-option">
+                    <a data-toggle="collapse" href="#databaseOptions" aria-expanded="false" aria-controls="databaseOptions">Database</a>
+                    <span class="badge badge-info float-right">1</span>
+                    <span class="float-right pl-2 pr-2 selected">Selected</span>
+                    <span class="float-right pl-2 pr-2 bar"></span>
+                    <span class="badge badge-info float-right">10</span>
+                    <span class="float-right pl-2 pr-2 available">Available</span>
+                    <div class="collapse" id="databaseOptions">
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="gdpCheckbox"> GDP
+                        </div>
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="revenueCheckbox"> Revenue
+                        </div>
+                        <!-- Add more options here -->
+                    </div>
+                </li>
+                <hr class="dropdown-divider">
+                <li class="filter-option">
+                    <a data-toggle="collapse" href="#regionOptions" aria-expanded="false" aria-controls="regionOptions">Region</a>
+                    <span class="badge badge-info float-right">1</span>
+                    <span class="float-right pl-2 pr-2">Selected</span>
+                    <span class="float-right pl-2 pr-2 bar"></span>
+                    <span class="badge badge-info float-right">10</span>
+                    <span class="float-right pl-2 pr-2">Available</span>
+                    <div class="collapse" id="regionOptions">
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="region1Checkbox"> Region 1
+                        </div>
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="region2Checkbox"> Region 2
+                        </div>
+                        <!-- Add more options here -->
+                    </div>
+                </li>
+                <hr class="dropdown-divider">
+                <li class="filter-option">
+                    <a data-toggle="collapse" href="#seriesOptions" aria-expanded="false" aria-controls="seriesOptions">Series</a>
+                    <span class="badge badge-info float-right">1</span>
+                    <span class="float-right pl-2 pr-2">Selected</span>
+                    <span class="float-right pl-2 pr-2 bar"></span>
+                    <span class="badge badge-info float-right">10</span>
+                    <span class="float-right pl-2 pr-2">Available</span>
+                    <div class="collapse" id="seriesOptions">
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="series1Checkbox"> Series 1
+                        </div>
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="series2Checkbox"> Series 2
+                        </div>
+                        <!-- Add more options here -->
+                    </div>
+                </li>
+                <hr class="dropdown-divider">
+                <li class="filter-option">
+                    <a data-toggle="collapse" href="#yearOptions" aria-expanded="false" aria-controls="yearOptions">Year</a>
+                    <span class="badge badge-info float-right">1</span>
+                    <span class="float-right pl-2 pr-2">Selected</span>
+                    <span class="float-right pl-2 pr-2 bar"></span>
+                    <span class="badge badge-info float-right">10</span>
+                    <span class="float-right pl-2 pr-2">Available</span>
+                    <div class="collapse" id="yearOptions">
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="year1Checkbox"> Year 1
+                        </div>
+                        <div class="filter-submenu">
+                            <input type="checkbox" id="year2Checkbox"> Year 2
+                        </div>
+                        <!-- Add more options here -->
+                    </div>
+                </li>
+                <hr class="dropdown-divider">
+            </ul>
+        </div>
+            <div class="col-md-8">
+                <!-- Add disabled attribute to the display options buttons before the apply button is clicked -->
+                <div id="displayOptions" style="display: flex; margin-left: 300px;">
+                    <a class="btn btn-info text-white" style="margin-right: 20px; width: 100px; height: 35px "><i class="fas fa-table"></i> Table</a>
+                    <a class="btn btn-info text-white" style="margin-right: 20px; width: 100px; height: 35px "><i class="fas fa-chart-bar"></i> Chart</a>
+                    <a class="btn btn-info text-white" style="margin-right: 20px; width: 100px; height: 35px " ><i class="fas fa-map"></i> Map</a>
+                    <!-- Example single danger button -->
+                    <div class="btn-group" >
+                        <button type="button" style="margin-right: 20px; width: 100px; height: 35px "class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Move the data display section below the filter selection card -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        Filter Selection
+                    </div>
+                    <div class="card-body">
+                        <ul id="filterSelections">
+                            <li class="filter-option-selection">
+                                <span class="filter-option-name">Database:</span>
+                                <span class="filter-option-checkmark"></span>
+                            </li>
+                            <li class="filter-option-selection">
+                                <span class="filter-option-name">Region:</span>
+                                <span class="filter-option-checkmark"></span>
+                            </li>
+                            <li class="filter-option-selection">
+                                <span class="filter-option-name">Series:</span>
+                                <span class="filter-option-checkmark"></span>
+                            </li>
+                            <li class="filter-option-selection">
+                                <span class="filter-option-name">Year:</span>
+                                <span class="filter-option-checkmark"></span>
+                            </li>
+                        </ul>
+                        <!-- Add event listener to the apply button to hide the filter selection card and show the data display section -->
+                        <button id="applyButton" class="btn btn-info mt-3">Apply</button>
+                    </div>
+                </div>
+                <!-- Add this code to move the data display section below the filter selection card -->
+                <div id="dataDisplay" class="data-display">
+                    <table id="table"  class="table table-bordered table-hover">
+                        <thead>
+                            <tr id="header-row">
+                                <!-- Table columns will be dynamically added here -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Add table rows here -->
+                        </tbody>
+                    </table>
+                    <div id="chart">
+                        <!-- Add chart here -->
+                    </div>
+                    <figure class="highcharts-figure">
+                        <div id="map"></div>
+
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.highcharts.com/highcharts.js"></script> <!-- Add highcharts library -->
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Add exporting module for highcharts -->
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <!-- Add export data module for highcharts -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Add bootstrap js library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Add jquery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+   <!-- Datatable-->
+   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+
+   <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
+   <script src="../../assets/plugins/datatables/jquery.dataTables.min.js"></script>
+   <script src="../../assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+   <script src="../../assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+   <script src="../../assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+   <script src="../../assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+   <script src="../../assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+   <script src="../../assets/plugins/jszip/jszip.min.js"></script>
+   <script src="../../assets/plugins/pdfmake/pdfmake.min.js"></script>
+   <script src="../../assets/plugins/pdfmake/vfs_fonts.js"></script>
+   <script src="../../assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+   <script src="../../assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+   <script src="../../assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+ 
+   <script src="../../dist/js/adminlte.min2167.js?v=3.2.0"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Hide data display section by default
+            $(".data-display").hide();
+            // Show filter selection card by default
+            $(".card").show(); 
+            // Add event listeners to the filter checkboxes
+            $('.filter-submenu input[type="checkbox"]').on('change', function () {
+                updateFilterSelection();
+            });
+
+            $("#displayOptions a:nth-child(1)").click(function () {
+                // Show table
+                $(".data-display #table").show();
+
+                // Hide chart
+                $(".data-display #chart").hide();
+                $(".data-display #map").hide();
+
+                // Set table button active
+                $("#displayOptions a:nth-child(1)").addClass("active");
+                $("#displayOptions a:nth-child(2)").removeClass("active");
+                $("#displayOptions a:nth-child(3)").removeClass("active");
+            });
+
+            // Add event listener to chart button
+            $("#displayOptions a:nth-child(2)").click(function () {
+                // Show chart
+                $(".data-display #chart").show();
+
+                // Hide table
+                $(".data-display #table").hide();
+                $(".data-display #map").hide();
+
+                // Set chart button active
+                $("#displayOptions a:nth-child(2)").addClass("active");
+                $("#displayOptions a:nth-child(1)").removeClass("active");
+                $("#displayOptions a:nth-child(3)").removeClass("active");
+            });
+
+            $("#displayOptions a:nth-child(3)").click(function () {
+                // Show map
+                $(".data-display #map").show();
+
+                // Hide table and chart
+                $(".data-display #table").hide();
+                $(".data-display #chart").hide();
+
+                // Set map button active
+                $("#displayOptions a:nth-child(3)").addClass("active");
+                $("#displayOptions a:nth-child(1)").removeClass("active");
+                $("#displayOptions a:nth-child(2)").removeClass("active");
+
+                (async () => {
+                    let sonifyOnHover = false;
+                
+                    const topology = await fetch(
+                        'https://code.highcharts.com/mapdata/countries/fr/fr-all.topo.json'
+                    ).then(response => response.json());
+                
+                    // Instantiate the map
+                    Highcharts.mapChart('map', {
+                        chart: {
+                            map: topology
+                        },
+                        title: {
+                            text: 'France population density (/km²)',
+                            align: 'left'
+                        },
+                        subtitle: {
+                            text: 'Click a map area to start sonifying as you interact with the map',
+                            align: 'left'
+                        },
+                        sonification: {
+                            // Play marker / tooltip can make it hard to click other points
+                            // while a point is playing, so we turn it off
+                            showTooltip: false
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            backgroundColor: 'rgba(255,255,255,0.85)',
+                            floating: true,
+                            verticalAlign: 'bottom',
+                            align: 'left',
+                            symbolHeight: 450
+                        },
+                        colorAxis: {
+                            min: 1,
+                            max: 1000,
+                            type: 'logarithmic',
+                            stops: [
+                                [0, '#0B4C63'],
+                                [0.5, '#7350BB'],
+                                [0.7, '#3CD391'],
+                                [0.9, '#4AA0FF']
+                            ],
+                            marker: {
+                                color: '#343'
+                            }
+                        },
+                        responsive: {
+                            rules: [{
+                                condition: {
+                                    maxWidth: 580
+                                },
+                                chartOptions: {
+                                    legend: {
+                                        layout: 'horizontal',
+                                        floating: false,
+                                        align: 'center',
+                                        symbolHeight: 10
+                                    }
+                                }
+                            }]
+                        },
+                        tooltip: {
+                            valueSuffix: '/km²'
+                        },
+                        series: [{
+                            name: 'Population density',
+                            sonification: {
+                                tracks: [{
+                                    // First play a note to indicate new map area
+                                    instrument: 'vibraphone',
+                                    mapping: {
+                                        pitch: 'c7',
+                                        volume: 0.3
+                                    }
+                                }, {
+                                    mapping: {
+                                        // Array of notes to play. We just repeat the same note
+                                        // and vary the gap between the notes to indicate
+                                        // density. Note: Can use Array.from in modern browsers
+                                        pitch: Array.apply(null, Array(25)).map(function () {
+                                            return 'g2';
+                                        }),
+                                        gapBetweenNotes: {
+                                            mapTo: '-value', // Smaller value = bigger gaps
+                                            min: 90,
+                                            max: 1000,
+                                            mapFunction: 'logarithmic'
+                                        },
+                                        pan: 0,
+                                        noteDuration: 500,
+                                        playDelay: 150 // Make space for initial notification
+                                    }
+                                }, {
+                                    // Speak the name after a while
+                                    type: 'speech',
+                                    language: 'fr-FR', // Speak in French, preferably
+                                    mapping: {
+                                        text: '{point.name}',
+                                        volume: 0.4,
+                                        rate: 1.5,
+                                        playDelay: 1500
+                                    }
+                                }]
+                            },
+                            accessibility: {
+                                point: {
+                                    valueDescriptionFormat: '{xDescription}, {point.value} people per square kilometer.'
+                                }
+                            },
+                            events: {
+                                mouseOut: function () {
+                                    // Cancel sonification when mousing out of point
+                                    this.chart.sonification.cancel();
+                                }
+                            },
+                            point: {
+                                // Handle when to sonify and not
+                                events: {
+                                    // We require a click before we start playing, so we don't
+                                    // surprise users. Also some browsers will block audio
+                                    // until there have been interactions.
+                                    click: function () {
+                                        if (!sonifyOnHover) {
+                                            this.sonify();
+                                        } else {
+                                            this.series.chart.sonification.cancel();
+                                        }
+                                        sonifyOnHover = !sonifyOnHover;
+                                    },
+                                    mouseOver: function () {
+                                        if (sonifyOnHover) {
+                                            this.sonify();
+                                        }
+                                    }
+                                }
+                            },
+                            cursor: 'pointer',
+                            borderColor: '#4A5A4A',
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}'
+                            },
+                            data: [
+                                ['fr-hdf', 189],
+                                ['fr-nor', 111],
+                                ['fr-idf', 1021],
+                                ['fr-ges', 97],
+                                ['fr-bre', 123],
+                                ['fr-pdl', 119],
+                                ['fr-cvl', 66],
+                                ['fr-bfc', 59],
+                                ['fr-naq', 72],
+                                ['fr-ara', 115],
+                                ['fr-occ', 82],
+                                ['fr-pac', 162],
+                                ['fr-lre', 344],
+                                ['fr-may', 1],
+                                ['fr-gf', 3],
+                                ['fr-mq', 323],
+                                ['fr-gua', 236],
+                                ['fr-cor', 39]
+                            ]
+                        }]
+                    });
+                })();
+
+            });
+            // Add sample data for the table
+                var data = [
+                { year: 2018, gdp: 1000, revenue: 500 },
+                { year: 2019, gdp: 1200, revenue: 600 },
+                { year: 2020, gdp: 1500, revenue: 750 },
+                { year: 2021, gdp: 1800, revenue: 900 },
+                { year: 2022, gdp: 2000, revenue: 1000 }
+                ];
+
+                // Get the header row of the table
+                var headerRow = document.getElementById("header-row");
+
+                // Format the column names before adding them to the table
+                Object.keys(data[0]).forEach(function(key) {
+                var formattedColumnName = key.charAt(0).toUpperCase() + key.slice(1);
+                formattedColumnName = formattedColumnName.replace(/_/g, " ");
+
+                var th = document.createElement("th");
+                th.textContent = formattedColumnName;
+                headerRow.appendChild(th);
+                });
+
+                // Populate the table with the sample data
+                var tbody = "";
+
+                for (var i = 0; i < data.length; i++) {
+                tbody += "<tr>";
+                Object.values(data[i]).forEach(function(value) {
+                    tbody += "<td>" + value + "</td>";
+                });
+                tbody += "</tr>";
+                }
+
+                document.querySelector("#table tbody").innerHTML = tbody;
+                
+                
+
+            // Add sample data for the chart
+            var chartData = [
+                { year: "2018", value: 1000 },
+                { year: "2019", value: 1200 },
+                { year: "2020", value: 1500 },
+                { year: "2021", value: 1800 },
+                { year: "2022", value: 2000 }
+            ];
+
+            // Create the chart using highcharts library
+            Highcharts.chart('chart', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Sample Chart'
+                },
+                xAxis: {
+                    categories: chartData.map(function (data) { return data.year; })
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    }
+                },
+                series: [{
+                    name: 'Value',
+                    data: chartData.map(function (data) { return data.value; })
+                }],
+                exporting: {
+                    enabled: true,
+                    csv: {
+                        dateFormat: '%Y-%m-%d'
+                    }
+                }
+            });
+
+
+
+            // Add event listener to table button
+            $("#tableButton").click(function () {
+                // Show table
+                $(".data-display #table").show();
+
+                // Hide chart
+                $(".data-display #chart").hide();
+                $(".data-display #map").hide();
+
+                // Set table button active
+                $("#tableButton").addClass("active");
+                $("#chartButton").removeClass("active");
+                $("#mapbutton").removeClass("active");
+            });
+
+            // Add event listener to chart button
+            $("#chartButton").click(function () {
+                // Show chart
+                $(".data-display #chart").show();
+
+                // Hide table
+                $(".data-display #table").hide();
+                $(".data-display #map").hide();
+
+                // Set chart button active
+                $("#chartButton").addClass("active");
+                $("#tableButton").removeClass("active");
+                $("#mapbutton").removeClass("active");
+            });
+
+            // Add event listener to map button
+            $("#mapbutton").click(function () {
+                // Show chart
+                $(".data-display #map").show();
+
+                // Hide table
+                $(".data-display #chart").hide();
+                $(".data-display #table").hide();
+
+                // Set chart button active
+                $("#mapbutton").addClass("active");
+                $("#chartButton").removeClass("active");
+                $("#tableButton").removeClass("active");
+            });
+
+            // Add event listener to apply button
+            $("#applyButton").click(function () {
+                // Hide filter selection card
+                $(".card").hide();
+
+                // Show data display section
+                $("#dataDisplay").show();
+
+                // Show table
+                $("#table").show();
+
+                // Hide chart
+                $("#chart").hide();
+                $("#map").hide();
+            });
+
+            // Initialize the filter selection card
+            updateFilterSelection();
+        });
+
+        function updateFilterSelection() {
+            var isFilterSelected = true;
+
+            // Check if at least one filter submenu is selected from each filter option
+            $('#filters .filter-option').each(function () {
+                var filterOption = $(this);
+                var filterOptionName = filterOption.find('a').text();
+                var filterSubmenu = filterOption.find('.filter-submenu');
+
+                if (filterSubmenu.find('input[type="checkbox"]:checked').length === 0) {
+                    isFilterSelected = false;
+                }
+
+                // Update the checkmark color based on the submenu selection
+                var filterOptionSelection = $('#filterSelections .filter-option-selection:contains("' + filterOptionName + '")');
+                var filterOptionCheckmark = filterOptionSelection.find('.filter-option-checkmark');
+                if (filterSubmenu.find('input[type="checkbox"]').is(':checked')) {
+                    filterOptionCheckmark.addClass('green-checkmark');
+                } else {
+                    filterOptionCheckmark.removeClass('green-checkmark');
+                }
+
+                // Add this code to set the color dynamically using JavaScript
+                if (filterOptionCheckmark.hasClass('green-checkmark')) {
+                    filterOptionCheckmark.css('color', 'green');
+                } else {
+                    filterOptionCheckmark.css('color', '');
+                }
+            });
+
+            // Update the apply button visibility and show the filter selection card if at least one filter is selected
+            if (isFilterSelected) {
+                $('#applyButton').show();
+                $('.card').show();
+            } else {
+                $('#applyButton').hide();
+                $('.card').hide();
+            }
+        }
+
+        $(function () {
+
+            $('#table').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false,
+              "responsive": true,
+            });
+          });
+    </script>
 </body>
+
 </html>
