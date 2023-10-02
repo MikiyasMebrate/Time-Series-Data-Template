@@ -7,12 +7,14 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
 
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     </head>
     <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
 
+    <link rel="stylesheet" href="../../assets/dist/css/adminlte.min2167.css?v=3.2.0">
+    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -55,7 +57,19 @@
             margin-top: 5px;
             margin-bottom: 1px;
         }
-
+        .fas.fa-chevron-right {
+            transition: transform 0.2s ease-in-out;
+          }
+          
+          .collapsed .fas.fa-chevron-right {
+            transform: rotate(0deg);
+          }
+          
+          .expanded .fas.fa-chevron-right {
+            transform: rotate(90deg);
+          }
+          
+          
         /* Add this code to hide the data display section by default */
     </style>
 </head>
@@ -66,83 +80,129 @@
         <hr class="divider">
         <div class="row">
             <div class="col-md-4">
-            <h4>Indicator Varibles</h4>
-            <hr class="dropdown-divider">
-            <ul id="filters">
-                <li class="filter-option">
-                    <a data-toggle="collapse" href="#databaseOptions" aria-expanded="false" aria-controls="databaseOptions">Database</a>
-                    <span class="badge badge-info float-right">1</span>
-                    <span class="float-right pl-2 pr-2 selected">Selected</span>
-                    <span class="float-right pl-2 pr-2 bar"></span>
-                    <span class="badge badge-info float-right">10</span>
-                    <span class="float-right pl-2 pr-2 available">Available</span>
-                    <div class="collapse" id="databaseOptions">
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="gdpCheckbox"> GDP
-                        </div>
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="revenueCheckbox"> Revenue
-                        </div>
-                        <!-- Add more options here -->
-                    </div>
-                </li>
+                <h4>Indicator Variables</h4>
                 <hr class="dropdown-divider">
-                <li class="filter-option">
-                    <a data-toggle="collapse" href="#regionOptions" aria-expanded="false" aria-controls="regionOptions">Region</a>
-                    <span class="badge badge-info float-right">1</span>
-                    <span class="float-right pl-2 pr-2">Selected</span>
-                    <span class="float-right pl-2 pr-2 bar"></span>
-                    <span class="badge badge-info float-right">10</span>
-                    <span class="float-right pl-2 pr-2">Available</span>
-                    <div class="collapse" id="regionOptions">
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="region1Checkbox"> Region 1
-                        </div>
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="region2Checkbox"> Region 2
-                        </div>
-                        <!-- Add more options here -->
+                <ul id="filters">
+                  <li class="filter-option">
+                    <button class="btn btn-link btn-block collapsed text-dark" type="button" data-toggle="collapse" data-target="#databaseOptions" aria-expanded="false" aria-controls="databaseOptions">
+                        <i class="fas fa-chevron-right float-left pr-1"></i>
+                        <span class="float-left">Database</span> 
+                        <span class="badge badge-info float-right">1</span>
+                        <span class="float-right pl-2 pr-2 selected">Selected</span>
+                        <span class="float-right pl-2 pr-2 bar"></span>
+                        <span class="badge badge-info float-right">10</span>
+                        <span class="float-right pl-2 pr-2 available">Available</span>
+                      </button>
+              
+                    <div class="collapse pl-4 pr-1" id="databaseOptions">
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="gdpCheckbox"> GDP
+                      </div>
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="revenueCheckbox"> Revenue
+                      </div>
+                      <!-- Add more options here -->
                     </div>
-                </li>
-                <hr class="dropdown-divider">
-                <li class="filter-option">
-                    <a data-toggle="collapse" href="#seriesOptions" aria-expanded="false" aria-controls="seriesOptions">Series</a>
-                    <span class="badge badge-info float-right">1</span>
-                    <span class="float-right pl-2 pr-2">Selected</span>
-                    <span class="float-right pl-2 pr-2 bar"></span>
-                    <span class="badge badge-info float-right">10</span>
-                    <span class="float-right pl-2 pr-2">Available</span>
-                    <div class="collapse" id="seriesOptions">
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="series1Checkbox"> Series 1
-                        </div>
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="series2Checkbox"> Series 2
-                        </div>
-                        <!-- Add more options here -->
+                  </li>
+                  <hr class="dropdown-divider">
+                  <li class="filter-option">
+                    <button class="btn btn-link  btn-block collapsed text-dark" type="button" data-toggle="collapse" data-target="#regionOptions" aria-expanded="false" aria-controls="regionOptions">
+                        <i class="fas fa-chevron-right float-left pr-1"></i>
+                        <span class="float-left">Region</span> 
+                        <span class="badge badge-info float-right">1</span>
+                        <span class="float-right pl-2 pr-2 selected">Selected</span>
+                        <span class="float-right pl-2 pr-2 bar"></span>
+                        <span class="badge badge-info float-right">10</span>
+                        <span class="float-right pl-2 pr-2 available">Available</span>
+                    </button>
+ 
+                    <div class="collapse  pl-4 pr-1"" id="regionOptions">
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="region1Checkbox"> Region 1
+                      </div>
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="region2Checkbox"> Region 2
+                      </div>
+                      <!-- Add more options here -->
                     </div>
-                </li>
-                <hr class="dropdown-divider">
-                <li class="filter-option">
-                    <a data-toggle="collapse" href="#yearOptions" aria-expanded="false" aria-controls="yearOptions">Year</a>
-                    <span class="badge badge-info float-right">1</span>
-                    <span class="float-right pl-2 pr-2">Selected</span>
-                    <span class="float-right pl-2 pr-2 bar"></span>
-                    <span class="badge badge-info float-right">10</span>
-                    <span class="float-right pl-2 pr-2">Available</span>
-                    <div class="collapse" id="yearOptions">
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="year1Checkbox"> Year 1
-                        </div>
-                        <div class="filter-submenu">
-                            <input type="checkbox" id="year2Checkbox"> Year 2
-                        </div>
-                        <!-- Add more options here -->
+                  </li>
+                  <hr class="dropdown-divider">
+                  <li class="filter-option">
+                    <button class="btn btn-link  btn-block collapsed text-dark" type="button" data-toggle="collapse" data-target="#seriesOptions" aria-expanded="false" aria-controls="seriesOptions">
+                        <i class="fas fa-chevron-right float-left pr-1"></i>
+                        <span class="float-left">Database</span> 
+                        <span class="badge badge-info float-right">1</span>
+                        <span class="float-right pl-2 pr-2 selected">Selected</span>
+                        <span class="float-right pl-2 pr-2 bar"></span>
+                        <span class="badge badge-info float-right">10</span>
+                        <span class="float-right pl-2 pr-2 available">Available</span>
+                    </button>
+
+                    <div class="collapse  pl-4 pr-1"" id="seriesOptions">
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="series1Checkbox"> Series 1
+                      </div>
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="series2Checkbox"> Series 2
+                      </div>
+                      <!-- Add more options here -->
                     </div>
-                </li>
-                <hr class="dropdown-divider">
-            </ul>
-        </div>
+                  </li>
+                  <hr class="dropdown-divider">
+                  <li class="filter-option">
+                    <button class="btn btn-link  btn-block collapsed text-dark" type="button" data-toggle="collapse" data-target="#yearOptions" aria-expanded="false" aria-controls="yearOptions">
+                        <i class="fas fa-chevron-right float-left pr-1"></i>
+                        <span class="float-left">Year</span> 
+                        <span class="badge badge-info float-right">1</span>
+                        <span class="float-right pl-2 pr-2 selected">Selected</span>
+                        <span class="float-right pl-2 pr-2 bar"></span>
+                        <span class="badge badge-info float-right">10</span>
+                        <span class="float-right pl-2 pr-2 available">Available</span>
+                    </button>
+
+                    <div class="collapse  pl-4 pr-1"" id="yearOptions">
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="year1Checkbox"> Year 1
+                      </div>
+                      <div class="filter-submenu">
+                        <input type="checkbox" id="year2Checkbox"> Year 2
+                      </div>
+                      <!-- Add more options here -->
+                    </div>
+                  </li>
+                  <hr class="dropdown-divider">
+                </ul>
+              </div>
+            <script>
+                var buttons = document.querySelectorAll('[data-toggle="collapse"]');
+
+                buttons.forEach(function(button) {
+                  var icon = button.querySelector('.fas.fa-chevron-right');
+                
+                  if (button.classList.contains('collapsed')) {
+                    button.classList.add('collapsed');
+                    icon.classList.add('fa-chevron-right');
+                  } else if (button.classList.contains('expanded')) {
+                    button.classList.add('expanded');
+                    icon.classList.add('fa-chevron-down');
+                  }
+                
+                  button.addEventListener('click', function() {
+                    if (button.classList.contains('collapsed')) {
+                      button.classList.remove('collapsed');
+                      button.classList.add('expanded');
+                      icon.classList.remove('fa-chevron-right');
+                      icon.classList.add('fa-chevron-down');
+                    } else {
+                      button.classList.remove('expanded');
+                      button.classList.add('collapsed');
+                      icon.classList.remove('fa-chevron-down');
+                      icon.classList.add('fa-chevron-right');
+                    }
+                  });
+                });
+                
+            </script>            
             <div class="col-md-8">
                 <!-- Add disabled attribute to the display options buttons before the apply button is clicked -->
                 <div id="displayOptions" style="display: flex; margin-left: 300px;">
@@ -193,6 +253,7 @@
                 </div>
                 <!-- Add this code to move the data display section below the filter selection card -->
                 <div id="dataDisplay" class="data-display">
+                    <div id="table-container"></div>
                     <table id="table"  class="table table-bordered table-hover">
                         <thead>
                             <tr id="header-row">
@@ -214,6 +275,7 @@
             </div>
         </div>
     </div>
+
     <script src="https://code.highcharts.com/highcharts.js"></script> <!-- Add highcharts library -->
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <!-- Add exporting module for highcharts -->
@@ -243,14 +305,18 @@
    <script src="../../assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
    <script src="../../assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
  
+   <script src="../../plugins/jquery/jquery.min.js"></script>
+
+   <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
    <script src="../../dist/js/adminlte.min2167.js?v=3.2.0"></script>
     <script>
         $(document).ready(function () {
 
+             // Show filter selection card by default
+            $(".card").show(); 
             // Hide data display section by default
             $(".data-display").hide();
-            // Show filter selection card by default
-            $(".card").show(); 
             // Add event listeners to the filter checkboxes
             $('.filter-submenu input[type="checkbox"]').on('change', function () {
                 updateFilterSelection();
