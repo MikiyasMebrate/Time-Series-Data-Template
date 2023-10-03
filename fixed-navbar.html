@@ -42,20 +42,32 @@
         <div class="collapse navbar-collapse fs-5" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item ms-2">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
             </li>
             <li class="nav-item ms-2">
-              <a class="nav-link" href="#">Data</a>
+              <a class="nav-link" href="data.html">Data</a>
             </li>
             <li class="nav-item ms-2">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="contact.html">Contact</a>
             </li>
             <li class="nav-item ms-2">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="about.html">About</a>
             </li>
           </ul>
-          <div class="d-grid">
-            <button class="ms-2 me-2 btn btn-outline-danger">Logout</button>
+          <div class="dropdown dropstart">
+            <button
+              class="btn btn-primary btn-lg dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
           </div>
         </div>
       </div>
