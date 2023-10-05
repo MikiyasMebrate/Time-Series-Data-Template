@@ -64,38 +64,106 @@
             margin-top: 5px;
             margin-bottom: 1px;
         }
-
-
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .card {
+            margin: auto; /* set margin to auto to center the card horizontally */
+          }
+          .col-md-8 {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+          }
+          
 
         /* Add this code to hide the data display section by default */
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <!--Navbar Start-->
+    <nav class="navbar navbar-expand-lg p-0 navbar-light shadow bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img
+              src="assets/image/mopd_logo.jpg"
+              width="60px"
+              class="img-fluid ms-2"
+              alt="MoPD-logo"
+              srcset=""
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse fs-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item ms-2">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item ms-2">
+                <a class="nav-link" href="data.html">Data</a>
+              </li>
+              <li class="nav-item ms-2">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
+              <li class="nav-item ms-2">
+                <a class="nav-link" href="about.html">About</a>
+              </li>
+            </ul>
+            <div class="dropdown dropstart">
+              <button
+                class="btn btn-primary btn-lg dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fas fa-user"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!--Navbar End-->
+  
+    <div class="container-fluid mt-3">
         <h2>Ethiopia Development Indicator</h2>
         <hr class="divider">
         <div class="row">
 
-            <div class="col-md-4">
-                <h4>Indicator Variables</h4>
+            <div class="col-md-4 mt-2">
+                <h4 class="ms-1">Indicator Variables</h4>
                 <hr class="dropdown-divider">
-                <div class="accordion" id="accordionExample">
+                <div class="accordion collapsed mt-3" id="accordionExample">
+                    
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="databaseHeader">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#databaseOptions" aria-expanded="true" aria-controls="databaseOptions">
-                        <span class="float-start me-4"> <strong>Database</strong> </span>
-                        <span class="float-end ps-3 pe-2 available">Available</span>
-                        <span class="badge rounded-pill bg-info float-end ">10</span>
-                        <span class="float-end ps-1 pe-1 bar"></span>
-                        <span class="float-end ps-2 pe-2 selected">Selected</span>
-                        <span class="badge rounded-pill bg-info float-end ">1</span>
-                    </button>
-                    
-                    
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#databaseOptions" aria-expanded="false" aria-controls="databaseOptions">
+                                <span class="float-start me-4"> <strong>Database</strong> </span>
+                                <span class="float-end ps-3 pe-2 available">Available</span>
+                                <span class="badge rounded-pill bg-info float-end ">10</span>
+                                <span class="float-end ps-1 pe-1 bar"></span>
+                                <span class="float-end ps-2 pe-2 selected">Selected</span>
+                                <span class="badge rounded-pill bg-info float-end ">1</span>
+                            </button>
                         </h2>
-                        <div id="databaseOptions" class="accordion-collapse collapse show"
+                        <div id="databaseOptions" class="accordion-collapse collapse"
                             aria-labelledby="databaseHeader" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="filter-submenu">
@@ -108,6 +176,8 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="regionHeader">
@@ -199,23 +269,23 @@
                             class="fas fa-map"></i> Map</a>
                     <!-- Example single danger button -->
                     <div class="btn-group">
-                        <button type="button" style="margin-right: 20px; width: 100px; height: 35px "
-                            class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Action
+                        <button type="button" class="btn btn-info btn-flat text-white">Download</button>
+                        <button type="button"
+                            class="btn btn-info btn-flat dropdown-toggle dropdown-icon"
+                            data-toggle="dropdown">
+                            <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="#">CSV</a>
+                            <a class="dropdown-item" href="#">PDF</a>
+                            <a class="dropdown-item" href="#">Excel</a>
+
+                        </div>
                     </div>
                 </div>
                 <!-- Move the data display section below the filter selection card -->
-                <div class="card mt-3">
-                    <div class="card-header">
-                        Filter Selection
-                    </div>
+                <div class="card-container">
+                <div class="card w-25 mt-3">
                     <div class="card-body">
                         <ul id="filterSelections" class="list-group">
                             <li class="filter-option-selection list-group-item">
@@ -238,6 +308,7 @@
                         <!-- Add event listener to the apply button to hide the filter selection card and show the data display section -->
                         <button id="applyButton" class="btn btn-info mt-3">Apply</button>
                     </div>
+                </div>
                 </div>
                 <style>
                     .green-checkmark::before {
@@ -280,6 +351,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <!-- Button -->
+    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <script>
