@@ -279,7 +279,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Users Lists</h1>
+              <h1 class="m-0">Data Detail</h1>
             </div>
           </div>
         </div>
@@ -288,137 +288,41 @@
 
       <section class="content">
         <div class="container-fluid">
-          <!--Card Start-->
           <div class="row">
-            <div class="col-lg-4 col-6">
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Total Users</p>
+            <div class="col-md-9">
+              <form>
+                <div class="text-start">
+                  <button
+                    type="button"
+                    class="btn btn-primary mb-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#userRegistration"
+                    data-bs-whatever="@mdo"
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning mb-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#userRegistration"
+                    data-bs-whatever="@mdo"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger mb-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#userRegistration"
+                    data-bs-whatever="@mdo"
+                  >
+                    Delete
+                  </button>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-6">
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Active Users</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-6">
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Inactive User</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
-          <!--Card End-->
-
-          <!--User Registration Button Start-->
-          <div class="text-end">
-            <button
-              type="button"
-              class="btn btn-primary mb-2"
-              data-bs-toggle="modal"
-              data-bs-target="#userRegistration"
-              data-bs-whatever="@mdo"
-            >
-              + Add User
-            </button>
-          </div>
-          <!--User Registration Button End-->
-          <!--User Table List Start-->
-          <div class="row justify-content-center">
-            <div class="col-md-12">
-              <div class="table-responsive border p-3 shadow">
-                <table
-                  id="example"
-                  class="table table-striped table-hover table-sm"
-                >
-                  <thead>
-                    <tr>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Created Date</th>
-                      <th>Account Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>MikiyasMebrate</td>
-                      <td>mikiyasmebrate@gmail.com</td>
-                      <td>11-04-25</td>
-                      <td>
-                        <span class="badge bg-success badge-lg">New</span>
-                      </td>
-                      <td>
-                        <div class="d-flex justify-content-around text-center">
-                          <a href="#"
-                            ><i class="fas text-primary fa-pen"></i
-                          ></a>
-                          <a href="#"
-                            ><i class="fas text-danger fa-trash"></i
-                          ></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>MikiyasMebrate</td>
-                      <td>mikiyasmebrate@gmail.com</td>
-                      <td>11-04-25</td>
-                      <td>
-                        <span class="badge bg-success badge-lg">Active</span>
-                      </td>
-                      <td>
-                        <div class="d-flex justify-content-around text-center">
-                          <a href="#"
-                            ><i class="fas text-primary fa-pen"></i
-                          ></a>
-                          <a href="#"
-                            ><i class="fas text-danger fa-trash"></i
-                          ></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>KaleabHegie</td>
-                      <td>KaleabHegie@gmail.com</td>
-                      <td>11-04-25</td>
-                      <td>
-                        <span class="badge bg-danger badge-lg">Inactive</span>
-                      </td>
-                      <td>
-                        <div class="d-flex justify-content-around text-center">
-                          <a href="#"
-                            ><i class="fas text-primary fa-pen"></i
-                          ></a>
-                          <a href="#"
-                            ><i class="fas text-danger fa-trash"></i
-                          ></a>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <!--User Table List End-->
         </div>
       </section>
     </div>
@@ -433,35 +337,21 @@
     </footer>
 
     <aside class="control-sidebar control-sidebar-dark"></aside>
-
-    <!--Loading JS-->
-    <script src="/assets/plugins/jquery/jquery.min.js"></script>
-    <script src="/assets/js/adminlte2167.js?v=3.2.0"></script>
-
-    <!--Chart -->
-    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <script src="/assets/plugins/chart.js/Chart.min.js"></script>
-    <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <script src="/assets/plugins/moment/moment.min.js"></script>
-    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-
-    <!--Chart Data-->
-    <script src="/assets/js/pages/dashboard.js"></script>
-
-    <!--Data Table-->
-
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script>
-      table = $('#example').DataTable( {
-        retrieve: true,
-        paging: true,
-        searching: true,
-    } );
-    </script>
-
   </body>
+  <!--Loading JS-->
+  <script src="/assets/plugins/jquery/jquery.min.js"></script>
+  <script src="/assets/js/adminlte2167.js?v=3.2.0"></script>
+
+  <!--Chart -->
+  <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="/assets/plugins/chart.js/Chart.min.js"></script>
+  <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+  <script src="/assets/plugins/moment/moment.min.js"></script>
+  <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
+  <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+  <!--Chart Data-->
+  <script src="/assets/js/pages/dashboard.js"></script>
 </html>
