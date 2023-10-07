@@ -8,22 +8,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
-
-    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
 
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
             integrity="sha512-..." crossorigin="anonymous" />
     </head>
-    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
 
-    <link rel="stylesheet" href="../../assets/dist/css/adminlte.min2167.css?v=3.2.0">
-    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="assets/dist/css/adminlte.min2167.css?v=3.2.0">
+    <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
     <!-- Map Libraries -->
     <script src="https://code.highcharts.com/maps/highmaps.js"></script>
@@ -64,21 +63,33 @@
             margin-top: 5px;
             margin-bottom: 1px;
         }
+
         .card-container {
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .card {
+            margin: auto;
+            /* set margin to auto to center the card horizontally */
+        }
+        #filterColumn {
+            border-right: 0.5px solid rgb(165, 161, 161);
+            display: flex;
+            flex-direction: column;
           }
           
-          .card {
-            margin: auto; /* set margin to auto to center the card horizontally */
-          }
-          .col-md-8 {
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
+          #dataColumn {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
           }
           
 
+        .form-check-input[type="checkbox"]:hover+.form-check-label::before {
+            cursor: pointer;
+        }
         /* Add this code to hide the data display section by default */
     </style>
 </head>
@@ -87,84 +98,70 @@
     <!--Navbar Start-->
     <nav class="navbar navbar-expand-lg p-0 navbar-light shadow bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
-            ><img
-              src="assets/image/mopd_logo.jpg"
-              width="60px"
-              class="img-fluid ms-2"
-              alt="MoPD-logo"
-              srcset=""
-          /></a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse fs-5" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item ms-2">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-              </li>
-              <li class="nav-item ms-2">
-                <a class="nav-link" href="data.html">Data</a>
-              </li>
-              <li class="nav-item ms-2">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-              <li class="nav-item ms-2">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-            </ul>
-            <div class="dropdown dropstart">
-              <button
-                class="btn btn-primary btn-lg dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i class="fas fa-user"></i>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
-              </ul>
+            <a class="navbar-brand" href="#"><img src="assets/image/mopd_logo.jpg" width="60px" class="img-fluid ms-2"
+                    alt="MoPD-logo" srcset="" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse fs-5" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item ms-2">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link" href="data.html">Data</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div class="dropdown dropstart">
+                    <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
-      <!--Navbar End-->
-  
-    <div class="container-fluid mt-3">
+    </nav>
+    <!--Navbar End-->
+
+    <div class="container-fluid ">
         <h2>Ethiopia Development Indicator</h2>
         <hr class="divider">
         <div class="row">
-
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 col-sm-6 col-lg-4" id="filterColumn">
                 <h4 class="ms-1">Indicator Variables</h4>
                 <hr class="dropdown-divider">
                 <div class="accordion collapsed mt-3" id="accordionExample">
-                    
+
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="databaseHeader">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#databaseOptions" aria-expanded="false" aria-controls="databaseOptions">
-                                <span class="float-start me-4"> <strong>Database</strong> </span>
-                                <span class="float-end ps-3 pe-2 available">Available</span>
-                                <span class="badge rounded-pill bg-info float-end ">10</span>
-                                <span class="float-end ps-1 pe-1 bar"></span>
-                                <span class="float-end ps-2 pe-2 selected">Selected</span>
-                                <span class="badge rounded-pill bg-info float-end ">1</span>
+                                <span class="d-flex align-items-center w-100">
+                                    <strong class="me-auto">Database</strong>
+                                    <span class="d-flex align-items-center">
+                                        <span class="">Available</span>
+                                        <span class="badge rounded-pill bg-info ms-1">10</span>
+                                        <span class="ps-1 pe-1 bar"></span>
+                                        <span class="ms-2">Selected</span>
+                                        <span class="badge rounded-pill bg-info ms-1 me-2">1</span>
+                                    </span>
+                                </span>
                             </button>
                         </h2>
-                        <div id="databaseOptions" class="accordion-collapse collapse"
-                            aria-labelledby="databaseHeader" data-bs-parent="#accordionExample">
+                        <div id="databaseOptions" class="accordion-collapse collapse" aria-labelledby="databaseHeader"
+                            data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="filter-submenu">
                                     <input type="checkbox" id="gdpCheckbox"> GDP
@@ -176,19 +173,23 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="regionHeader">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#regionOptions" aria-expanded="false" aria-controls="regionOptions">
-                                <span class="float-start pe-3 me-4">  <strong>Region</strong></span>
-                                <span class="float-end ps-3 pe-2 available">Available</span>
-                                <span class="badge rounded-pill bg-info float-end ">10</span>
-                                <span class="float-end ps-1 pe-1 bar"></span>
-                                <span class="float-end ps-2 pe-2 selected">Selected</span>
-                                <span class="badge rounded-pill bg-info float-end ">1</span>
+                                <span class="d-flex align-items-center w-100">
+                                    <strong class="me-auto">Region</strong>
+                                    <span class="d-flex align-items-center">
+                                        <span class="">Available</span>
+                                        <span class="badge rounded-pill bg-info ms-1">10</span>
+                                        <span class="ps-1 pe-1 bar"></span>
+                                        <span class="ms-2">Selected</span>
+                                        <span class="badge rounded-pill bg-info ms-1 me-2">1</span>
+                                    </span>
+                                </span>
                             </button>
                         </h2>
                         <div id="regionOptions" class="accordion-collapse collapse" aria-labelledby="regionHeader"
@@ -208,38 +209,49 @@
                         <h2 class="accordion-header" id="seriesHeader">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#seriesOptions" aria-expanded="false" aria-controls="seriesOptions">
-                                <span class="float-start me-5"><strong>Series</strong></span>
-                                <span class="float-end ps-3 pe-2 available">Available</span>
-                                <span class="badge rounded-pill bg-info float-end ">10</span>
-                                <span class="float-end ps-1 pe-1 bar"></span>
-                                <span class="float-end ps-2 pe-2 selected">Selected</span>
-                                <span class="badge rounded-pill bg-info float-end ">1</span>
+                                <span class="d-flex align-items-center w-100">
+                                    <strong class="me-auto">Year</strong>
+                                    <span class="d-flex align-items-center">
+                                        <span class="">Available</span>
+                                        <span class="badge rounded-pill bg-info ms-1">10</span>
+                                        <span class="ps-1 pe-1 bar"></span>
+                                        <span class="ms-2">Selected</span>
+                                        <span class="badge rounded-pill bg-info ms-1 me-2">1</span>
+                                    </span>
+                                </span>
                             </button>
                         </h2>
                         <div id="seriesOptions" class="accordion-collapse collapse" aria-labelledby="seriesHeader"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="filter-submenu">
-                                    <input type="checkbox" id="series1Checkbox"> Series 1
+                                <div class="filter-submenu d-flex align-items-center">
+                                    <input type="checkbox" id="series1Checkbox" class="me-2">
+                                    <label for="series1Checkbox" class="mb-0">Series 1</label>
                                 </div>
-                                <div class="filter-submenu">
-                                    <input type="checkbox" id="series2Checkbox"> Series 2
+                                <div class="filter-submenu d-flex align-items-center">
+                                    <input type="checkbox" id="series2Checkbox" class="me-2">
+                                    <label for="series2Checkbox" class="mb-0">Series 2</label>
                                 </div>
                                 <!-- Add more options here -->
                             </div>
                         </div>
                     </div>
 
+
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="yearHeader">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#yearOptions" aria-expanded="false" aria-controls="yearOptions">
-                                <span class="float-start me-5 pe-2"><strong>Year</strong> </span>
-                                <span class="float-end ps-3 pe-2 available">Available</span>
-                                <span class="badge rounded-pill bg-info float-end ">10</span>
-                                <span class="float-end ps-1 pe-1 bar"></span>
-                                <span class="float-end ps-2 pe-2 selected">Selected</span>
-                                <span class="badge rounded-pill bg-info float-end ">1</span>
+                                <span class="d-flex align-items-center w-100">
+                                    <strong class="me-auto">Series</strong>
+                                    <span class="d-flex align-items-center">
+                                        <span class="">Available</span>
+                                        <span class="badge rounded-pill bg-info ms-1">10</span>
+                                        <span class="ps-1 pe-1 bar"></span>
+                                        <span class="ms-2">Selected</span>
+                                        <span class="badge rounded-pill bg-info ms-1 me-2">1</span>
+                                    </span>
+                                </span>
                             </button>
                         </h2>
                         <div id="yearOptions" class="accordion-collapse collapse" aria-labelledby="yearHeader"
@@ -257,81 +269,84 @@
                 </div>
             </div> <!-- end of col-md-4 -->
 
+            <div class="col-md-8 col-sm-6 col-lg-8 pb-5 pt-1" id="dataColumn">
 
-            <div class="col-md-8">
                 <!-- Add disabled attribute to the display options buttons before the apply button is clicked -->
-                <div id="displayOptions" style="display: flex; margin-left: 300px;">
-                    <a class="btn btn-info text-white" style="margin-right: 20px; width: 100px; height: 35px "><i
-                            class="fas fa-table"></i> Table</a>
-                    <a class="btn btn-info text-white" style="margin-right: 20px; width: 100px; height: 35px "><i
-                            class="fas fa-chart-bar"></i> Chart</a>
-                    <a class="btn btn-info text-white" style="margin-right: 20px; width: 100px; height: 35px "><i
-                            class="fas fa-map"></i> Map</a>
-                    <!-- Example single danger button -->
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-info btn-flat text-white">Download</button>
-                        <button type="button"
-                            class="btn btn-info btn-flat dropdown-toggle dropdown-icon"
-                            data-toggle="dropdown">
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="#">CSV</a>
-                            <a class="dropdown-item" href="#">PDF</a>
-                            <a class="dropdown-item" href="#">Excel</a>
-
+                <div id="displayOptions" class="d-flex justify-content-between align-items-end mb-2 flex-row-reverse">
+                    <div class="d-flex">
+                        <a class="btn btn-info text-white me-3" style="width: 100px; height: 38px "><i
+                                class="fas fa-table"></i> Table</a>
+                        <a class="btn btn-info text-white me-3" style="width: 100px; height: 38px "><i
+                                class="fas fa-chart-bar"></i> Chart</a>
+                        <a class="btn btn-info text-white me-3" style="width: 100px; height: 38px "><i
+                                class="fas fa-map"></i> Map</a>
+                        <!-- Example single danger button -->
+                        <div class="dropdown">
+                            <button class="btn btn-info text-white dropdown-toggle me-3 " type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Download
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Excel</a></li>
+                                <li><a class="dropdown-item" href="#">CSV</a></li>
+                                <li><a class="dropdown-item" href="#">PDF</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-check form-switch ms-3">
+                        <input type="checkbox" class="form-check-input" role="switch" id="toggleButton">
+                    </div>
+                </div>
+                     
+                
+                <!-- Move the data display section below the filter selection card -->
+                <div class="card-container">
+                    <div class="card mt-3" style="width:300px;  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+                        <div class="card-body pe-5 ps-5">
+                            <div id="filterSelections" class="d-flex flex-column">
+                                <div class="filter-option-selection mb-2">
+                                    <span class="filter-option-label">Database:</span>
+                                    <span class="filter-option-checkmark"></span>
+                                </div>
+                                <div class="filter-option-selection mb-2">
+                                    <span class="filter-option-label">Region:</span>
+                                    <span class="filter-option-checkmark"></span>
+                                </div>
+                                <div class="filter-option-selection mb-2">
+                                    <span class="filter-option-label">Series:</span>
+                                    <span class=" filter-option-checkmark"></span>
+                                </div>
+                                <div class="filter-option-selection mb-2">
+                                    <span class="filter-option-label">Year:</span>
+                                    <span class="filter-option-checkmark"></span>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <!-- Add event listener to the apply button to hide the filter selection card and show the data display section -->
+                                <button id="applyButton" class="btn btn-info text-white mt-3">Apply</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Move the data display section below the filter selection card -->
-                <div class="card-container">
-                <div class="card w-25 mt-3">
-                    <div class="card-body">
-                        <ul id="filterSelections" class="list-group">
-                            <li class="filter-option-selection list-group-item">
-                                <span class="filter-option-name">Database:</span>
-                                <span class="filter-option-checkmark"></span>
-                            </li>
-                            <li class="filter-option-selection list-group-item">
-                                <span class="filter-option-name">Region:</span>
-                                <span class="filter-option-checkmark"></span>
-                            </li>
-                            <li class="filter-option-selection list-group-item">
-                                <span class="filter-option-name">Series:</span>
-                                <span class="filter-option-checkmark"></span>
-                            </li>
-                            <li class="filter-option-selection list-group-item">
-                                <span class="filter-option-name">Year:</span>
-                                <span class="filter-option-checkmark" ></span>
-                            </li>
-                        </ul>
-                        <!-- Add event listener to the apply button to hide the filter selection card and show the data display section -->
-                        <button id="applyButton" class="btn btn-info mt-3">Apply</button>
-                    </div>
-                </div>
-                </div>
-                <style>
-                    .green-checkmark::before {
-                        color: green;
-                    }
-                </style>
+
                 <!-- Add this code to move the data display section below the filter selection card -->
                 <div id="dataDisplay" class="data-display">
-                    <div id="table-container"></div>
-                    <table id="table" class="table table-bordered table-hover">
-                        <thead>
-                            <tr id="header-row">
-                                <!-- Table columns will be dynamically added here -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Add table rows here -->
-                        </tbody>
-                    </table>
-                    <div id="chart">
+                    <div id="table-container" class="container">
+                        <table id="table" class="table table-bordered table-hover">
+                            <thead>
+                                <tr id="header-row">
+                                    <!-- Table columns will be dynamically added here -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Add table rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="chart" class="container">
                         <!-- Add chart here -->
                     </div>
-                    <figure class="highcharts-figure">
+                    <figure class="highcharts-figure container">
                         <div id="map"></div>
 
                     </figure>
@@ -340,35 +355,52 @@
         </div>
     </div>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script> <!-- Add highcharts library -->
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <!-- Add exporting module for highcharts -->
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <!-- Add export data module for highcharts -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Add bootstrap js library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Add jquery library -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <!-- Button -->
-    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
-    <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- datatable -->
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="assets/plugins/jszip/jszip.min.js"></script>
+    <script src="assets/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="assets/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+    <script src="assets/dist/js/adminlte.min2167.js?v=3.2.0"></script>
+    <script src="assets/dist/js/demo.js"></script>
+
+    <!-- chart js -->
+    <script src="../../assets/plugins/chart.js/Chart.min.js"></script>
     <script>
         $(document).ready(function () {
 
             $(".card").show();
             // Hide data display section by default
             $(".data-display").hide();
+            // Hide apply button by default
+            $("#applyButton").hide();
             // Add event listeners to the filter checkboxes
             $('.filter-submenu input[type="checkbox"]').on('change', function () {
                 updateFilterSelection();
             });
+
+            //collpase button 
+            $("#toggleButton").click(function () {
+                $("#filterColumn").toggleClass("d-none");
+                $("#dataColumn").toggleClass("col-md-8 col-lg-12");
+            });
+            //make the first button in display-option div display table when clicked
             $("#displayOptions a:nth-child(1)").click(function () {
                 // Show table
-                $(".data-display #table").show();
+                $(".data-display #table-container").show();
 
                 // Hide chart
                 $(".data-display #chart").hide();
@@ -380,13 +412,13 @@
                 $("#displayOptions a:nth-child(3)").removeClass("active");
             });
 
-            // Add event listener to chart button
+            //make the second button in display-option div display chart when clicked
             $("#displayOptions a:nth-child(2)").click(function () {
                 // Show chart
                 $(".data-display #chart").show();
 
                 // Hide table
-                $(".data-display #table").hide();
+                $(".data-display #table-container").hide();
                 $(".data-display #map").hide();
 
                 // Set chart button active
@@ -395,12 +427,13 @@
                 $("#displayOptions a:nth-child(3)").removeClass("active");
             });
 
+            //make the third button in display-option div display map when clicked
             $("#displayOptions a:nth-child(3)").click(function () {
                 // Show map
                 $(".data-display #map").show();
 
                 // Hide table and chart
-                $(".data-display #table").hide();
+                $(".data-display #table-container").hide();
                 $(".data-display #chart").hide();
 
                 // Set map button active
@@ -419,10 +452,6 @@
                     Highcharts.mapChart('map', {
                         chart: {
                             map: topology
-                        },
-                        title: {
-                            text: 'France population density (/km²)',
-                            align: 'left'
                         },
                         subtitle: {
                             text: 'Click a map area to start sonifying as you interact with the map',
@@ -576,6 +605,7 @@
                 })();
 
             });
+
             // Add sample data for the table
             var data = [
                 { year: 2018, gdp: 1000, revenue: 500 },
@@ -600,7 +630,7 @@
 
             // Populate the table with the sample data
             var tbody = "";
-
+            //append data to table
             for (var i = 0; i < data.length; i++) {
                 tbody += "<tr>";
                 Object.values(data[i]).forEach(function (value) {
@@ -610,7 +640,6 @@
             }
 
             document.querySelector("#table tbody").innerHTML = tbody;
-
 
             // Add sample data for the chart
             var chartData = [
@@ -649,12 +678,10 @@
                 }
             });
 
-
-
-            // Add event listener to table button
+            // Add event listener to table button to be active color
             $("#tableButton").click(function () {
                 // Show table
-                $(".data-display #table").show();
+                $(".data-display #table-container").show();
 
                 // Hide chart
                 $(".data-display #chart").hide();
@@ -666,35 +693,37 @@
                 $("#mapbutton").removeClass("active");
             });
 
-            // Add event listener to chart button
+            // Add event listener to chart button to be active color
             $("#chartButton").click(function () {
                 // Show chart
                 $(".data-display #chart").show();
 
                 // Hide table
-                $(".data-display #table").hide();
+                $(".data-display #table-container").hide();
                 $(".data-display #map").hide();
 
                 // Set chart button active
                 $("#chartButton").addClass("active");
                 $("#tableButton").removeClass("active");
                 $("#mapbutton").removeClass("active");
+
             });
 
-            // Add event listener to map button
+            // Add event listener to map button to be active color
             $("#mapbutton").click(function () {
                 // Show chart
                 $(".data-display #map").show();
 
                 // Hide table
                 $(".data-display #chart").hide();
-                $(".data-display #table").hide();
+                $(".data-display #table-container").hide();
 
                 // Set chart button active
                 $("#mapbutton").addClass("active");
                 $("#chartButton").removeClass("active");
                 $("#tableButton").removeClass("active");
             });
+
 
             // Add event listener to apply button
             $("#applyButton").click(function () {
@@ -705,7 +734,7 @@
                 $("#dataDisplay").show();
 
                 // Show table
-                $("#table").show();
+                $("#table-container").show();
 
                 // Hide chart
                 $("#chart").hide();
@@ -715,6 +744,21 @@
             // Initialize the filter selection card
             updateFilterSelection();
         });
+
+        //make datatable
+        $(function () {
+            $('#table').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+        //update chack mark when selected
         function updateFilterSelection(checkbox) {
             var isFilterSelected = true;
         
@@ -754,7 +798,6 @@
                 $('.card').show();
             }
         }
-        
     </script>
 </body>
 
