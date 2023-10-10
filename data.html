@@ -30,16 +30,6 @@
     <script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
 
     <style>
-        .green-checkmark::before {
-            content: "\2714";
-            color: green !important;
-        }
-
-        /* Add this code to set the default color of the checkmark */
-        .filter-option-selection .filter-option-checkmark::before {
-            color: green !important;
-        }
-
         .highcharts-figure {
             min-width: 320px;
             max-width: 750px;
@@ -88,11 +78,28 @@
           .form-check-input {
             cursor: pointer;
         }
-
+        .column {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+            grid-gap: 1px; /* Gap between columns */
+        }
         .btn.active {
             background-color:rgb(0, 119, 255);; /* Replace with your desired color */
         }
-        /* Add this code to hide the data display section by default */
+        
+        .year-options-accordion {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+          }
+        .check{
+            font-size: 12px; 
+            color: rgb(0, 128, 55);
+            -webkit-text-stroke-width: 1.2px; 
+            border: 2.7px solid; 
+            border-radius: 50%; 
+            padding: 1px; opacity: 1; 
+            background-color: rgb(255, 255, 255);
+        }
     </style>
 </head>
 
@@ -183,17 +190,15 @@
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="filter-submenu">
-                                    <input type="checkbox" id="gdpCheckbox"> GDP
+                                    <input type="radio" id="gdpCheckbox"> GDP
                                 </div>
                                 <div class="filter-submenu">
-                                    <input type="checkbox" id="revenueCheckbox"> Revenue
+                                    <input type="radio" id="revenueCheckbox"> Revenue
                                 </div>
                                 <!-- Add more options here -->
                             </div>
                         </div>
                     </div>
-
-
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="regionHeader">
@@ -214,12 +219,26 @@
                         <div id="regionOptions" class="accordion-collapse collapse" aria-labelledby="regionHeader"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
+                                <div class="column">
                                 <div class="filter-submenu">
                                     <input type="checkbox" id="region1Checkbox"> Region 1
                                 </div>
                                 <div class="filter-submenu">
                                     <input type="checkbox" id="region2Checkbox"> Region 2
                                 </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="region3Checkbox"> Region 3
+                                </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="region4Checkbox"> Region 4
+                                </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="region5Checkbox"> Region 5
+                                </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="region6Checkbox"> Region 6
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -229,7 +248,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#seriesOptions" aria-expanded="false" aria-controls="seriesOptions">
                                 <span class="d-flex align-items-center w-100">
-                                    <strong class="me-auto">Year</strong>
+                                    <strong class="me-auto">Series</strong>
                                     <span class="d-flex align-items-center">
                                         <span class="">Available</span>
                                         <span class="badge rounded-pill bg-info ms-1">10</span>
@@ -257,12 +276,12 @@
                     </div>
 
 
-                    <div class="accordion-item">
+                    <div class="accordion-item ">
                         <h2 class="accordion-header" id="yearHeader">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#yearOptions" aria-expanded="false" aria-controls="yearOptions">
                                 <span class="d-flex align-items-center w-100">
-                                    <strong class="me-auto">Series</strong>
+                                    <strong class="me-auto">Year</strong>
                                     <span class="d-flex align-items-center">
                                         <span class="">Available</span>
                                         <span class="badge rounded-pill bg-info ms-1">10</span>
@@ -276,12 +295,26 @@
                         <div id="yearOptions" class="accordion-collapse collapse" aria-labelledby="yearHeader"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
+                                <div class="column">
                                 <div class="filter-submenu">
-                                    <input type="checkbox" id="region1Checkbox"> Year 1
+                                    <input type="checkbox" id="year1Checkbox"> Year 1
                                 </div>
                                 <div class="filter-submenu">
-                                    <input type="checkbox" id="region2Checkbox"> Year 2
+                                    <input type="checkbox" id="year2Checkbox"> Year 2
                                 </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="year3Checkbox"> Year 3
+                                </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="year4Checkbox"> Year 4
+                                </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="year5Checkbox"> Year 5
+                                </div>
+                                <div class="filter-submenu">
+                                    <input type="checkbox" id="year6Checkbox"> Year 6
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -301,8 +334,8 @@
                                 class="fas fa-map"></i> Map</a>
                         <!-- Example single danger button -->
                         <div class="dropdown">
-                            <button class="btn btn-info text-white dropdown-toggle me-3 " type="button" id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-info text-white dropdown-toggle me-3 " type="button" id="downloadButton"
+                                data-bs-toggle="dropdown" aria-expanded="false" disabled>
                                 Download
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -325,32 +358,32 @@
                             <div id="filterSelections" class="d-flex flex-column">
                                 <div class="filter-option-selection mb-2">
                                     <span class="filter-option-label">Database:</span>
-                                    <span class="filter-option-checkmark"></span>
+                                    <span class="filter-option-checkmark" id="boot-icon1" ></span>
                                 </div>
                                 <div class="filter-option-selection mb-2">
                                     <span class="filter-option-label">Region:</span>
-                                    <span class="filter-option-checkmark"></span>
+                                    <span class="filter-option-checkmark " id="boot-icon2"></span>
                                 </div>
                                 <div class="filter-option-selection mb-2">
                                     <span class="filter-option-label">Series:</span>
-                                    <span class=" filter-option-checkmark"></span>
+                                    <span class="filter-option-checkmark" id="boot-icon3"></span>
                                 </div>
                                 <div class="filter-option-selection mb-2">
                                     <span class="filter-option-label">Year:</span>
-                                    <span class="filter-option-checkmark"></span>
+                                    <span class="filter-option-checkmark" id="boot-icon4"></span>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <!-- Add event listener to the apply button to hide the filter selection card and show the data display section -->
-                                <button id="applyButton" class="btn btn-info text-white mt-3">Apply</button>
+                            <div class="text-center" id="button">
+                
                             </div>
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Add this code to move the data display section below the filter selection card -->
-                <div id="dataDisplay" class="data-display">
-                    <div id="table-container" class="container">
+                <div id="dataDisplay" class="data-display container">
+                    <div id="table-container">
                         <table id="table" class="table table-bordered table-hover">
                             <thead>
                                 <tr id="header-row">
@@ -404,10 +437,8 @@
             $(".card").show();
             // Hide data display section by default
             $(".data-display").hide();
-            // Hide apply button by default
-            $("#applyButton").hide();
             // Add event listeners to the filter checkboxes
-            $('.filter-submenu input[type="checkbox"]').on('change', function () {
+            $('.filter-submenu input[type="checkbox"], .filter-submenu input[type="radio"]').on('change', function () {
                 updateFilterSelection();
             });
 
@@ -744,8 +775,8 @@
             });
 
 
-            // Add event listener to apply button
-            $("#applyButton").click(function () {
+            // Add event listener to the #button div
+            $('#button').on('click', '#applyButton', function () {
                 // Hide filter selection card
                 $(".card").hide();
 
@@ -755,11 +786,11 @@
                 // Show table
                 $("#table-container").show();
 
+                document.getElementById("downloadButton").disabled = false;
                 // Hide chart
                 $("#chart").hide();
                 $("#map").hide();
             });
-
             // Initialize the filter selection card
             updateFilterSelection();
         });
@@ -777,46 +808,45 @@
             });
         });
 
-        //update chack mark when selected
-        function updateFilterSelection(checkbox) {
+        function updateFilterSelection() {
             var isFilterSelected = true;
+            var applyButtonExists = $('#applyButton').length > 0;
         
             // Check if at least one filter submenu is selected from each filter option
             $('.accordion .accordion-item').each(function () {
                 var filterOption = $(this);
-                var filterOptionName = filterOption.find('a').text();
+                var filterOptionName = filterOption.find('strong').text();
                 var filterSubmenu = filterOption.find('.filter-submenu');
         
-                if (filterSubmenu.find('input[type="checkbox"]:checked').length === 0) {
-                    isFilterSelected = false;
-                }
-        
-                // Update the checkmark color based on the submenu selection
+                // Check if at least one checkbox or radio button is checked in the filter submenu
                 var filterOptionSelection = $('#filterSelections .filter-option-selection:contains("' + filterOptionName + '")');
                 var filterOptionCheckmark = filterOptionSelection.find('.filter-option-checkmark');
-                if (filterSubmenu.find('input[type="checkbox"]').is(':checked')) {
-                    filterOptionCheckmark.addClass('green-checkmark');
+                if (filterSubmenu.find('input[type="checkbox"]:checked').length === 0 && filterSubmenu.find('input[type="radio"]:checked').length === 0) {
+                    // Remove the checkmark on the card
+                    filterOptionCheckmark.removeClass('bi bi-check check');
+                    isFilterSelected = false;
                 } else {
-                    filterOptionCheckmark.removeClass('green-checkmark');
-                }
-        
-                // Add this code to set the color dynamically using JavaScript
-                if (filterOptionCheckmark.hasClass('green-checkmark')) {
-                    filterOptionCheckmark.css('color', 'green');
-                } else {
-                    filterOptionCheckmark.css('color', '');
+                    // Add the checkmark on the card
+                    filterOptionCheckmark.addClass('bi bi-check check');
                 }
             });
+
+            // Create and append new apply button to the #button div if all filters are selected and the button doesn't exist
+            if (isFilterSelected && !applyButtonExists) {
+                var applyButton = $('<button>').attr('id', 'applyButton').addClass('btn btn-info text-white mt-3').text('Apply');
+                $('#button').append(applyButton);
+            }
         
-            // Update the apply button visibility and show the filter selection card if at least one filter is selected
-            if (isFilterSelected) {
-                $('#applyButton').show();
-                $('.card').show();
-            } else {
-                $('#applyButton').hide();
-                $('.card').show();
+            // Remove the apply button from the #button div if not all filters are selected and the button exists
+            if (!isFilterSelected && applyButtonExists) {
+                $('#applyButton').remove();
             }
         }
+        
+        $('.filter-submenu input[type="checkbox"], .filter-submenu input[type="radio"]').on('change', function () {
+            updateFilterSelection();
+        });
+        
     </script>
 </body>
 
